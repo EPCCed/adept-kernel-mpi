@@ -28,7 +28,7 @@
 
 /* Level 1 benchmark driver - calls appropriate function */
 /* based on command line arguments.                      */
-void bench_level1(char *b, unsigned int s, unsigned int r, char *o, char *dt){
+void bench_level1(char *b, unsigned int s, unsigned int r, char *o, char *dt, char *algo){
 
   int world_rank;
   MPI_Comm_rank(MPI_COMM_WORLD,&world_rank);
@@ -108,62 +108,121 @@ void bench_level1(char *b, unsigned int s, unsigned int r, char *o, char *dt){
   /* Stencil codes */
   else if (strcmp(b, "stencil") == 0){
 
-    /* o is set to "dot_product" by default. Use this to check for a default */
-    if( strcmp(o, "27") == 0 || strcmp(o, "dot_product") == 0){
-      if(strcmp(dt, "double") == 0) double_stencil27(s);
-      else if (strcmp(dt, "float") == 0) float_stencil27(s);
-      else if (strcmp(dt, "int") == 0) int_stencil27(s);
-      else if (world_rank==0){
-        fprintf(stderr, "ERROR: check you are using a valid data type...\n");
+      if (strcmp(algo, "normal") == 0){
+	  /* o is set to "dot_product" by default. Use this to check for a default */
+	  if( strcmp(o, "27") == 0 || strcmp(o, "dot_product") == 0){
+	      if(strcmp(dt, "double") == 0) double_stencil27(s);
+	      else if (strcmp(dt, "float") == 0) float_stencil27(s);
+	      else if (strcmp(dt, "int") == 0) int_stencil27(s);
+	      else if (world_rank==0){
+		  fprintf(stderr, "ERROR: check you are using a valid data type...\n");
+	      }
+	  }
+
+	  else if(strcmp(o, "19") == 0){
+	      if(strcmp(dt, "double") == 0) double_stencil19(s);
+	      else if (strcmp(dt, "float") == 0) float_stencil19(s);
+	      else if (strcmp(dt, "int") == 0) int_stencil19(s);
+	      else if (world_rank==0){
+		  fprintf(stderr, "ERROR: check you are using a valid data type...\n");
+	      }
+	  }
+
+
+	  else if(strcmp(o, "9") == 0){
+	      if(strcmp(dt, "double") == 0) double_stencil9(s);
+	      else if (strcmp(dt, "float") == 0) float_stencil9(s);
+	      else if (strcmp(dt, "int") == 0) int_stencil9(s);
+	      else if (world_rank==0){
+		  fprintf(stderr, "ERROR: check you are using a valid data type...\n");
+	      }
+	  }
+
+
+	  else if(strcmp(o, "5") == 0){
+	      if(strcmp(dt, "double") == 0) double_stencil5(s);
+	      else if (strcmp(dt, "float") == 0) float_stencil5(s);
+	      else if (strcmp(dt, "int") == 0) int_stencil5(s);
+	      else if (world_rank==0){
+		  fprintf(stderr, "ERROR: check you are using a valid data type...\n");
+	      }
+	  }
+
+
+	  else if (world_rank==0){
+	      fprintf(stderr, "ERROR: check you are using a valid operation type...\n");
+	  }
       }
-    }
+      else if (strcmp(algo, "overlapped") == 0) {
+	  /* o is set to "dot_product" by default. Use this to check for a default */
+	  if( strcmp(o, "27") == 0 || strcmp(o, "dot_product") == 0){
+	      if(strcmp(dt, "double") == 0) double_stencil27_overlapped(s);
+	      else if (strcmp(dt, "float") == 0) float_stencil27_overlapped(s);
+	      else if (strcmp(dt, "int") == 0) int_stencil27_overlapped(s);
+	      else if (world_rank==0){
+		  fprintf(stderr, "ERROR: check you are using a valid data type...\n");
+	      }
+	  }
 
-    else if(strcmp(o, "19") == 0){
-      if(strcmp(dt, "double") == 0) double_stencil19(s);
-      else if (strcmp(dt, "float") == 0) float_stencil19(s);
-      else if (strcmp(dt, "int") == 0) int_stencil19(s);
-      else if (world_rank==0){
-        fprintf(stderr, "ERROR: check you are using a valid data type...\n");
+	  else if(strcmp(o, "19") == 0){
+	      if(strcmp(dt, "double") == 0) double_stencil19_overlapped(s);
+	      else if (strcmp(dt, "float") == 0) float_stencil19_overlapped(s);
+	      else if (strcmp(dt, "int") == 0) int_stencil19_overlapped(s);
+	      else if (world_rank==0){
+		  fprintf(stderr, "ERROR: check you are using a valid data type...\n");
+	      }
+	  }
+
+
+	  else if(strcmp(o, "9") == 0){
+	      if(strcmp(dt, "double") == 0) double_stencil9_overlapped(s);
+	      else if (strcmp(dt, "float") == 0) float_stencil9_overlapped(s);
+	      else if (strcmp(dt, "int") == 0) int_stencil9_overlapped(s);
+	      else if (world_rank==0){
+		  fprintf(stderr, "ERROR: check you are using a valid data type...\n");
+	      }
+	  }
+
+
+	  else if(strcmp(o, "5") == 0){
+	      if(strcmp(dt, "double") == 0) double_stencil5_overlapped(s);
+	      else if (strcmp(dt, "float") == 0) float_stencil5_overlapped(s);
+	      else if (strcmp(dt, "int") == 0) int_stencil5_overlapped(s);
+	      else if (world_rank==0){
+		  fprintf(stderr, "ERROR: check you are using a valid data type...\n");
+	      }
+	  }
+
+
+	  else if (world_rank==0){
+	      fprintf(stderr, "ERROR: check you are using a valid operation type...\n");
+	  }
+
       }
-    }
-
-
-    else if(strcmp(o, "9") == 0){
-      if(strcmp(dt, "double") == 0) double_stencil9(s);
-      else if (strcmp(dt, "float") == 0) float_stencil9(s);
-      else if (strcmp(dt, "int") == 0) int_stencil9(s);
-      else if (world_rank==0){
-        fprintf(stderr, "ERROR: check you are using a valid data type...\n");
+      else if (world_rank == 0) {
+	  fprintf(stderr, "ERROR: check you are using a valid algorithm.\n");
       }
-    }
-
-
-    else if(strcmp(o, "5") == 0){
-      if(strcmp(dt, "double") == 0) double_stencil5(s);
-      else if (strcmp(dt, "float") == 0) float_stencil5(s);
-      else if (strcmp(dt, "int") == 0) int_stencil5(s);
-      else if (world_rank==0){
-        fprintf(stderr, "ERROR: check you are using a valid data type...\n");
-      }
-    }
-
-
-    else if (world_rank==0){
-      fprintf(stderr, "ERROR: check you are using a valid operation type...\n");
-    }
-
   }
 
   else if (strcmp(b, "fileparse") == 0){
 
-    if(strcmp(o, "dot_product") == 0){
-      fileparse(s);
-    }
+      if(strcmp(o, "dot_product") == 0){
+	  fileparse(s);
+      }
 
-    else if (world_rank==0){
-      fprintf(stderr, "ERROR: check you are using a valid operation type...\n");
-    }
+      else if (world_rank==0){
+	  fprintf(stderr, "ERROR: check you are using a valid operation type...\n");
+      }
 
+  }  
+  else if (strcmp(b, "cg") == 0) {
+      if (strcmp(algo, "mixed") == 0) {
+	  conjugate_gradient_mixed(s);
+      }
+      else if (strcmp(algo, "normal") == 0) {
+	  conjugate_gradient(s);
+      }
+      else fprintf(stderr, "ERROR: check you are using a valid algorithm...\n");
   }
 
   else if (world_rank==0){

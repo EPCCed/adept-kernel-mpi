@@ -32,7 +32,7 @@ endif
 
 include platform_inc/${ARCH}_${CC}_${OPT}.inc
 
-SOURCES = main.c level1.c blas_op.c utils.c stencil.c fileparse.c matrix_utils.c
+SOURCES = main.c level1.c blas_op.c utils.c stencil.c fileparse.c matrix_utils.c cg.c
 LDFLAGS+= -lm
 EXE = kernel
 

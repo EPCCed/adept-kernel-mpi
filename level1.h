@@ -18,7 +18,7 @@
 /* See the License for the specific language governing permissions and */
 /* limitations under the License. */
 
-void bench_level1(char *, unsigned int, unsigned int, char *, char *);
+void bench_level1(char *, unsigned int, unsigned int, char *, char *, char *);
 
 int int_dot_product(unsigned int);
 int float_dot_product(unsigned int);
@@ -59,4 +59,23 @@ void double_stencil5(unsigned int);
 void float_stencil5(unsigned int);
 void int_stencil5(unsigned int);
 
+void double_stencil27_overlapped(unsigned int);
+void float_stencil27_overlapped(unsigned int);
+void int_stencil27_overlapped(unsigned int);
+
+void double_stencil19_overlapped(unsigned int);
+void float_stencil19_overlapped(unsigned int);
+void int_stencil19_overlapped(unsigned int);
+
+void double_stencil9_overlapped(unsigned int);
+void float_stencil9_overlapped(unsigned int);
+void int_stencil9_overlapped(unsigned int);
+
+void double_stencil5_overlapped(unsigned int);
+void float_stencil5_overlapped(unsigned int);
+void int_stencil5_overlapped(unsigned int);
+
 void fileparse(unsigned int);
+
+int conjugate_gradient(unsigned int);
+int conjugate_gradient_mixed(unsigned int);
